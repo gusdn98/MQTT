@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mqtt-tls
+    ports:
+      - "8883:8883"
+      - "9001:9001"
+    volumes:
+      - ./config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./config/passwd.txt:/mosquitto/config/passwd.txt
+      - ./data:/mosquitto/data
+      - ./log:/mosquitto/log
+      - ./certs/ca.pem:/mosquitto/config/certs/ca.pem
+      - ./certs/server.crt:/mosquitto/config/certs/server.crt
+      - ./certs/server.key:/mosquitto/config/certs/server.key
+    restart: always
